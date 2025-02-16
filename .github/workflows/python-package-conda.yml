@@ -1,27 +1,43 @@
-name: Tự động chạy test2.py 🚀
+name: Run Python Script with Conda 🚀
 
-on:  
-  push:  # Chạy khi có code mới được push lên GitHub
+on:
+  push:
     branches:
-      - main  # Chỉ chạy trên nhánh chính
-    
-  workflow_dispatch:  # Cho phép chạy thủ công từ GitHub Actions
+      - main
+  workflow_dispatch:
 
 jobs:
   run_python_script:
-    runs-on: ubuntu-latest  # Chạy trên môi trường Ubuntu
+    runs-on: ubuntu-latest
+
     steps:
       - name: 📥 Clone repository
-        uses: actions/checkout@v4  # Lấy code từ repo
+        uses: actions/checkout@v4
 
-      - name: 🐍 Cài đặt Python
-        uses: actions/setup-python@v4
+      - name: 🏗️ Cài đặt Conda
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.x'  # Chọn phiên bản Python
+          python-version: "3.9"
+          auto-update-conda: true
 
-      - name: 📦 Cài đặt dependencies
+      - name: 🐍 Tạo môi trường Conda
         run: |
-          pip install -r requirements.txt || echo "Không có file requirements.txt, bỏ qua..."
+          conda create --name myenv python=3.9 -y
+          source activate myenv
+          conda install -y pip
 
-      - name: 🚀 Chạy script Python
-        run: python test2.py  # Chạy file test2.py
+      - name: 🖥️ Cài đặt Google Chrome & ChromeDriver
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable
+          sudo apt install -y chromedriver
+
+      - name: 🐍 Cài đặt thư viện Python
+        run: |
+          source activate myenv
+          pip install selenium
+
+      - name: 🚀 Chạy script test2.py
+        run: |
+          source activate myenv
+          python test2.py
