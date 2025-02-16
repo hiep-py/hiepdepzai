@@ -1,0 +1,27 @@
+name: Tự động chạy test2.py 🚀
+
+on:  
+  push:  # Chạy khi có code mới được push lên GitHub
+    branches:
+      - main  # Chỉ chạy trên nhánh chính
+    
+  workflow_dispatch:  # Cho phép chạy thủ công từ GitHub Actions
+
+jobs:
+  run_python_script:
+    runs-on: ubuntu-latest  # Chạy trên môi trường Ubuntu
+    steps:
+      - name: 📥 Clone repository
+        uses: actions/checkout@v4  # Lấy code từ repo
+
+      - name: 🐍 Cài đặt Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Chọn phiên bản Python
+
+      - name: 📦 Cài đặt dependencies
+        run: |
+          pip install -r requirements.txt || echo "Không có file requirements.txt, bỏ qua..."
+
+      - name: 🚀 Chạy script Python
+        run: python test2.py  # Chạy file test2.py
