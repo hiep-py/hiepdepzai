@@ -19,12 +19,8 @@ jobs:
         with:
           python-version: "3.9"
           auto-update-conda: true
-
-      - name: 🐍 Tạo môi trường Conda
-        run: |
-          conda create --name myenv python=3.9 -y
-          source activate myenv
-          conda install -y pip
+          environment-file: environment.yml
+          activate-environment: myenv
 
       - name: 🖥️ Cài đặt Google Chrome & ChromeDriver
         run: |
@@ -33,11 +29,7 @@ jobs:
           sudo apt install -y chromedriver
 
       - name: 🐍 Cài đặt thư viện Python
-        run: |
-          source activate myenv
-          pip install selenium
+        run: conda run -n myenv pip install selenium
 
       - name: 🚀 Chạy script test2.py
-        run: |
-          source activate myenv
-          python test2.py
+        run: conda run -n myenv python test2.py
