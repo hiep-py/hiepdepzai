@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API.AERO5s</title>
+</head>
+<body>
+    <h1>Dữ liệu mới nhất:</h1>
+    <h2 id="data">Đang tải...</h2>
+    
+    <script>
+        function updateData() {
+            fetch("data.json")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("data").innerText = data.value + " (Cập nhật: " + data.timestamp + ")";
+                })
+                .catch(error => console.error("Lỗi khi tải dữ liệu:", error));
+        }
+
+        setInterval(updateData, 500);  // Cập nhật mỗi 5 giây
+        updateData();
+    </script>
+</body>
+</html>
