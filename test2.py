@@ -23,7 +23,7 @@ options.add_experimental_option("prefs", prefs)
 # --------------------- HÀM LẤY DỮ LIỆU ---------------------
 def fetch_data():
     driver = webdriver.Chrome(options=options)
-    URL = "https://aero.turbogames.io"
+    URL = "https://aero.turbogames.io/"
     driver.get(URL)
     
     wait = WebDriverWait(driver, 20)
