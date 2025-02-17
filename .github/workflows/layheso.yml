@@ -1,0 +1,31 @@
+name: Run Python Script
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có push lên nhánh main
+  pull_request:
+    branches:
+      - main  # Chạy khi có pull request đến nhánh main
+  workflow_dispatch:  # Cho phép chạy thủ công từ GitHub Actions
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install selenium
+
+      - name: 🚀 Run Python script
+        run: python test2.py  # Thay bằng tên file Python của bạn
