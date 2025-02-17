@@ -27,7 +27,7 @@ def fetch_data():
     driver.get(URL)
     
     wait = WebDriverWait(driver, 20)
-    data_element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="app"]/div[3]/div[3]/div[1]/div[1]')))
+    data_element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="app"]/div[3]/div[3]/div[1]')))
     print("🎯 Đã tìm thấy phần tử chứa dữ liệu!")
 
     while True:
